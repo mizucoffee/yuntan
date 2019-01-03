@@ -1,7 +1,8 @@
 {
   "name": "Yuntan",
   "version": "0.0.1",
-  "main": "dist/main/main.js",
+  "main": "dist/main/index.js",
+  "description": "",
   "repository": "https://github.com/mizucoffee/Yuntan.git",
   "author": "Ritsuki Goto <develop@mizucoffee.net>",
   "license": "MIT",
@@ -11,9 +12,14 @@
     "run-electron": "electron ."
   },
   "devDependencies": {
+    "@types/legal-eagle": "^0.15.0",
     "@types/node": "^10.12.18",
+    "about-window": "^1.12.1",
     "electron": "^4.0.0",
+    "fs-extra": "^7.0.1",
     "html-webpack-plugin": "^3.2.0",
+    "json-loader": "^0.5.7",
+    "legal-eagle": "^0.16.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.15.3",
     "ts-loader": "^5.3.2",
@@ -25,5 +31,10 @@
     "webpack": "^4.28.3",
     "webpack-cli": "^3.1.2",
     "webpack-merge": "^4.1.5"
+  },
+  "dependencies": {
+    "babylonjs": "^3.3.0",
+    "babylonjs-gui": "^3.3.0",
+    "sus-analyzer": "^2.1.0"
   }
 }

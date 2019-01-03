@@ -1,5 +1,17 @@
+const fs = require("fs-extra");
 const path = require("path");
 const merge = require("webpack-merge");
+const legalEagle = require("legal-eagle");
+
+legalEagle({ path: "./" }, (err, packagesLicenses) => {
+  if (err) {
+    throw new Error(err);
+  } else {
+    if (fs.pathExistsSync(path.join(__dirname, "./license.json")))
+      fs.removeSync(path.join(__dirname, "./license.json"));
+    fs.writeJsonSync("./license.json", packagesLicenses);
+  }
+});
 
 const common = {
   node: {
@@ -9,6 +21,11 @@ const common = {
   mode: process.env.ENV || "development",
   module: {
     rules: [
+      {
+        type: "javascript/auto",
+        test: /\.json$/,
+        use: [{ loader: "json-loader" }]
+      },
       {
         test: /\.ts$/,
         use: "ts-loader",
@@ -30,7 +47,8 @@ const common = {
     ]
   },
   resolve: {
-    extensions: [".ts", ".js"]
+    modules: ["node_modules"],
+    extensions: [".ts", ".js", ".json"]
   }
 };
 
@@ -40,7 +58,7 @@ module.exports = [
     entry: "./src/main/index.ts",
     output: {
       path: path.resolve(__dirname, "dist/main"),
-      filename: "main.js"
+      filename: "index.js"
     }
   }),
   merge(common, {
@@ -48,7 +66,7 @@ module.exports = [
     entry: "./src/renderer/index.ts",
     output: {
       path: path.resolve(__dirname, "dist/renderer"),
-      filename: "main.js"
+      filename: "index.js"
     }
   })
 ];
