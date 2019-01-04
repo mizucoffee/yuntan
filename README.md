@@ -1,6 +1,6 @@
 ![Yuntan-Logo](https://raw.githubusercontent.com/mizucoffee/Yuntan/master/resources/images/yuntan_top.png)
 
-<h2 align="center">"Cut the air" Game Simulator</h2>
+<h2 align="center">The "Cut the Air" Game Simulator</h2>
 
 <p align="center">
 <a alt="code style: prettier" href="https://github.com/prettier/prettier">
@@ -16,7 +16,7 @@
 
 ## 概要
 
-手を振ったりヘドバンしたりする音楽ゲームのシミュレータ   
+手を振ったりヘドバンしたりする音楽ゲームのシミュレータ  
 対応ファイル形式: .sus
 
 **Yuntan was inspired by Seaurchin.**
