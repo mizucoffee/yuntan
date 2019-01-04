@@ -1,12 +1,11 @@
-import * as openAboutWindow from 'about-window'
 import { app, App, BrowserWindow, Menu } from 'electron'
-import * as path from 'path'
 import __basedir from '../basedir'
+import About from './about'
 
 class Yuntan {
   private mainWindow: BrowserWindow | null = null
   private electronApp: App
-  private mainUrl: string = `file://${__basedir}/src/index.html`
+  private mainUrl: string = `file://${__basedir}/src/html/index.html`
 
   constructor(electronApp: App) {
     this.electronApp = electronApp
@@ -35,26 +34,18 @@ class Yuntan {
         label: 'Help',
         submenu: [
           {
-            click: () => console.log('clicked'),
+            click: () => console.log(),
             label: 'View License'
           },
           {
-            click: () =>
-              openAboutWindow.default({
-                copyright: 'Copyright (c) 2018 Mizucoffee',
-                icon_path: path.join(
-                  __basedir,
-                  'resources/images/yuntan_icon.png'
-                ),
-                open_devtools: true,
-                package_json_dir: __basedir
-              }),
-            label: 'About Yuntan'
+            click: () => new About(this.mainWindow),
+            label: 'About yuntan'
           }
         ]
       }
     ])
-    Menu.setApplicationMenu(menu)
+    Menu.setApplicationMenu(null)
+    this.mainWindow.setMenu(menu)
   }
 
   private onWindowAllClosed() {

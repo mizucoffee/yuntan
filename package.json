@@ -1,8 +1,8 @@
 {
-  "name": "Yuntan",
+  "name": "yuntan",
   "version": "0.0.1",
   "main": "dist/main/index.js",
-  "description": "",
+  "description": "The \"Cut the Air\" Game Simulator",
   "repository": "https://github.com/mizucoffee/Yuntan.git",
   "author": "Ritsuki Goto <develop@mizucoffee.net>",
   "license": "MIT",
@@ -14,7 +14,6 @@
   "devDependencies": {
     "@types/legal-eagle": "^0.15.0",
     "@types/node": "^10.12.18",
-    "about-window": "^1.12.1",
     "electron": "^4.0.0",
     "fs-extra": "^7.0.1",
     "html-webpack-plugin": "^3.2.0",

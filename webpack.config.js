@@ -7,9 +7,10 @@ legalEagle({ path: "./" }, (err, packagesLicenses) => {
   if (err) {
     throw new Error(err);
   } else {
-    if (fs.pathExistsSync(path.join(__dirname, "./license.json")))
-      fs.removeSync(path.join(__dirname, "./license.json"));
-    fs.writeJsonSync("./license.json", packagesLicenses);
+    fs.ensureDirSync("./dist");
+    if (fs.pathExistsSync(path.join(__dirname, "./dist/license.json")))
+      fs.removeSync(path.join(__dirname, "./dist/license.json"));
+    fs.writeJsonSync("./dist/license.json", packagesLicenses);
   }
 });
 
@@ -63,10 +64,13 @@ module.exports = [
   }),
   merge(common, {
     target: "electron-renderer",
-    entry: "./src/renderer/index.ts",
+    entry: {
+      index: "./src/renderer/index.ts",
+      about: "./src/renderer/about.ts"
+    },
     output: {
       path: path.resolve(__dirname, "dist/renderer"),
-      filename: "index.js"
+      filename: "[name].js"
     }
   })
 ];
