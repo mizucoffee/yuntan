@@ -1,6 +1,7 @@
 import { app, App, BrowserWindow, Menu } from 'electron'
 import __basedir from '../basedir'
 import About from './about'
+import License from './license'
 
 class Yuntan {
   private mainWindow: BrowserWindow | null = null
@@ -34,7 +35,7 @@ class Yuntan {
         label: 'Help',
         submenu: [
           {
-            click: () => console.log(),
+            click: () => new License(this.mainWindow),
             label: 'View License'
           },
           {

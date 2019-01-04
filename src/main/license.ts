@@ -4,26 +4,24 @@ import {
   Event,
   ipcMain
 } from 'electron'
-import * as packageJson from '../../package.json'
+import * as licenseJson from '../../dist/license.json'
 import __basedir from '../basedir'
 
 class About {
   private aboutWindow: BrowserWindow | null = null
-  private aboutUrl: string = `file://${__basedir}/src/html/about.html`
+  private aboutUrl: string = `file://${__basedir}/src/html/license.html`
 
   constructor(parent: BrowserWindow | null) {
     const option: BrowserWindowConstructorOptions = {}
 
     option.alwaysOnTop = true
-    option.height = 390
     option.maximizable = false
     option.minimizable = false
     if (parent != null) {
       option.parent = parent
     }
     option.resizable = false
-    option.width = 400
-    option.title = 'About yuntan'
+    option.title = 'Open Source License'
 
     this.aboutWindow = new BrowserWindow(option)
     this.aboutWindow.setMenu(null)
@@ -33,11 +31,11 @@ class About {
     this.aboutWindow.on('closed', () => {
       this.aboutWindow = null
     })
-    ipcMain.on('getPackage', this.getPackage)
+    ipcMain.on('getLicense', this.getLisence)
   }
 
-  private getPackage(event: Event) {
-    event.sender.send('package', packageJson)
+  private getLisence(event: Event) {
+    event.sender.send('license', licenseJson)
   }
 }
 

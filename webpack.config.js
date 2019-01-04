@@ -66,7 +66,8 @@ module.exports = [
     target: "electron-renderer",
     entry: {
       index: "./src/renderer/index.ts",
-      about: "./src/renderer/about.ts"
+      about: "./src/renderer/about.ts",
+      license: "./src/renderer/license.ts"
     },
     output: {
       path: path.resolve(__dirname, "dist/renderer"),
