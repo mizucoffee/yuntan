@@ -10,6 +10,7 @@
     "allowUnusedLabels": false,
     "removeComments": true,
     "sourceMap": true,
+    "typeRoots": ["./typing"],
     "resolveJsonModule": true
   },
   "exclude": [

@@ -34,6 +34,7 @@
   "dependencies": {
     "babylonjs": "^3.3.0",
     "babylonjs-gui": "^3.3.0",
+    "stats-js": "^1.0.0",
     "sus-analyzer": "^2.2.1"
   }
 }

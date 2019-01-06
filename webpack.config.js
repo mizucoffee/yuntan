@@ -30,7 +30,7 @@ const common = {
       {
         test: /\.ts$/,
         use: "ts-loader",
-        exclude: [/node_modules/]
+        exclude: /node_modules/
       },
       {
         enforce: "pre",
@@ -43,7 +43,8 @@ const common = {
               fix: true
             }
           }
-        ]
+        ],
+        exclude: /node_modules/
       }
     ]
   },

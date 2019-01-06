@@ -26,10 +26,59 @@ class Yuntan {
     this.mainWindow.on('closed', () => {
       this.mainWindow = null
     })
-
+    this.mainWindow.on('resize', () => {
+      if (this.mainWindow != null) {
+        this.mainWindow.webContents.send('resize')
+      }
+    })
+    const main = this.mainWindow
+    const ctrl = process.platform === 'darwin' ? 'Command' : 'Ctrl'
+    const file = process.platform === 'darwin' ? 'yuntan' : 'File'
     const menu = Menu.buildFromTemplate([
       {
-        label: 'File'
+        label: file,
+        submenu: [
+          {
+            accelerator: `${ctrl}+Q`,
+            label: 'Quit',
+            click() {
+              app.quit()
+            }
+          }
+        ]
+      },
+      {
+        label: 'View',
+        submenu: [
+          {
+            accelerator: `${ctrl}+R`,
+            label: 'Reload',
+            click() {
+              main.webContents.reload()
+            }
+          },
+          {
+            accelerator: 'F11',
+            label: 'Toggle Full Screen',
+            click() {
+              main.setFullScreen(!main.isFullScreen())
+            }
+          },
+          {
+            accelerator: `Alt+${ctrl}+S`,
+            label: 'Toggle Stats',
+            click() {
+              main.webContents.send('stats')
+            }
+          },
+          {
+            accelerator: `Alt+${ctrl}+I`,
+            label: 'Toggle Developer Tools',
+            click() {
+              main.webContents.toggleDevTools()
+            }
+          }
+        ]
       },
       {
         label: 'Help',
