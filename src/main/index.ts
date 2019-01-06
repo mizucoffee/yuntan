@@ -45,8 +45,12 @@ class Yuntan {
         ]
       }
     ])
-    Menu.setApplicationMenu(null)
-    this.mainWindow.setMenu(menu)
+    if (process.platform === 'darwin') {
+      Menu.setApplicationMenu(menu)
+    } else {
+      Menu.setApplicationMenu(null)
+      this.mainWindow.setMenu(menu)
+    }
   }
 
   private onWindowAllClosed() {
