@@ -1,18 +1,5 @@
-const fs = require("fs-extra");
 const path = require("path");
 const merge = require("webpack-merge");
-const legalEagle = require("legal-eagle");
-
-legalEagle({ path: "./" }, (err, packagesLicenses) => {
-  if (err) {
-    throw new Error(err);
-  } else {
-    fs.ensureDirSync("./dist");
-    if (fs.pathExistsSync(path.join(__dirname, "./dist/license.json")))
-      fs.removeSync(path.join(__dirname, "./dist/license.json"));
-    fs.writeJsonSync("./dist/license.json", packagesLicenses);
-  }
-});
 
 const common = {
   node: {
@@ -75,4 +62,4 @@ module.exports = [
       filename: "[name].js"
     }
   })
-];
+]

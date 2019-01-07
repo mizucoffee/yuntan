@@ -21,7 +21,12 @@
 
 **Yuntan was inspired by Seaurchin.**
 
-### 使用しているもの
+### Feature
+- Cross Platfrom (Win/Mac/Linux)
+- Open Source
+- Support Sus Format
+
+### Thanks
 
 - Electron
 - TypeScript
@@ -33,5 +38,5 @@
 
 ```sh
 yarn
-npm start
+yarn start
 ```

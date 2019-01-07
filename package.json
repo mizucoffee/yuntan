@@ -6,15 +6,62 @@
   "repository": "https://github.com/mizucoffee/Yuntan.git",
   "author": "Ritsuki Goto <develop@mizucoffee.net>",
   "license": "MIT",
+  "build": {
+    "productName": "yuntan",
+    "appId": "net.mizucoffee.yuntan",
+    "directories": {
+      "output": "build"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "icon": "resource/icons/yuntan.icns",
+      "target": [
+        "dir"
+      ],
+      "category": "public.app-category.music-games"
+    },
+    "win": {
+      "icon": "build/icons/yuntan.ico",
+      "target": "portable"
+    },
+    "linux": {
+      "icon": "build/icons",
+      "target": [
+        "dir"
+      ],
+      "category": "Game"
+    }
+  },
   "scripts": {
-    "start": "npm-run-all build run-electron",
+    "genLicense": "node buildLicense.js",
     "build": "webpack",
-    "run-electron": "electron ."
+    "run-electron": "electron .",
+    "start": "npm-run-all genLicense build run-electron",
+    "package": "npm-run-all package:*",
+    "package:mac": "electron-builder --mac --x64",
+    "package:windows": "electron-builder --win --x64",
+    "package:linux": "electron-builder --linux --x64"
   },
   "devDependencies": {
     "@types/legal-eagle": "^0.15.0",
     "@types/node": "^10.12.18",
+    "asar": "^0.14.6",
     "electron": "^4.0.0",
+    "electron-builder": "^20.38.4",
     "fs-extra": "^7.0.1",
     "html-webpack-plugin": "^3.2.0",
     "json-loader": "^0.5.7",
@@ -35,6 +82,7 @@
     "babylonjs": "^3.3.0",
     "babylonjs-gui": "^3.3.0",
     "stats-js": "^1.0.0",
-    "sus-analyzer": "^2.2.1"
+    "sus-analyzer": "^2.2.1",
+    "toml": "^2.3.5"
   }
 }

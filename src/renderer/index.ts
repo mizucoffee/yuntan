@@ -1,9 +1,9 @@
 import * as BABYLON from 'babylonjs'
 import { ipcRenderer } from 'electron'
 import * as Stats from 'stats-js'
-import __basedir from '../basedir'
 
-import Splash from './scene/splash'
+import Skin from './skin'
+import SkinManager from './skinmanager'
 
 const stats = new Stats()
 stats.dom.id = 'stats'
@@ -11,9 +11,8 @@ stats.dom.id = 'stats'
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
 const engine = new BABYLON.Engine(canvas, true)
 
-const splash = new Splash(canvas)
-
-const scene = splash.getScene()
+const skinManager = new SkinManager()
+const scene = new Skin(canvas, skinManager.getCurrentSkin())
 
 resize()
 engine.runRenderLoop(() => {

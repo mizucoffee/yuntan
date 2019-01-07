@@ -4,14 +4,16 @@ import {
   Event,
   ipcMain
 } from 'electron'
+import * as path from 'path'
 import * as packageJson from '../../package.json'
-import __basedir from '../basedir'
 
 class About {
-  private aboutWindow: BrowserWindow | null = null
-  private aboutUrl: string = `file://${__basedir}/src/html/about.html`
+  private window: BrowserWindow | null = null
+  private url: string
 
-  constructor(parent: BrowserWindow | null) {
+  constructor(parent: BrowserWindow | null, basePath: string) {
+    this.url = path.resolve(basePath, './resources/html/about.html')
+
     const option: BrowserWindowConstructorOptions = {}
 
     option.alwaysOnTop = true
@@ -25,13 +27,13 @@ class About {
     option.width = 400
     option.title = 'About yuntan'
 
-    this.aboutWindow = new BrowserWindow(option)
-    this.aboutWindow.setMenu(null)
+    this.window = new BrowserWindow(option)
+    this.window.setMenu(null)
 
-    this.aboutWindow.loadURL(this.aboutUrl)
+    this.window.loadURL(`file://${this.url}`)
 
-    this.aboutWindow.on('closed', () => {
-      this.aboutWindow = null
+    this.window.on('closed', () => {
+      this.window = null
     })
     ipcMain.on('getPackage', this.getPackage)
   }

@@ -1,15 +1,18 @@
 import { app, App, BrowserWindow, Menu } from 'electron'
-import __basedir from '../basedir'
+import * as path from 'path'
 import About from './about'
 import License from './license'
 
 class Yuntan {
   private mainWindow: BrowserWindow | null = null
   private electronApp: App
-  private mainUrl: string = `file://${__basedir}/src/html/index.html`
+  private mainUrl: string
 
   constructor(electronApp: App) {
     this.electronApp = electronApp
+    this.mainUrl =
+      'file://' +
+      path.resolve(electronApp.getAppPath(), './resources/html/index.html')
     this.electronApp.on('window-all-closed', () => this.onWindowAllClosed())
     this.electronApp.on('ready', () => this.onReady())
     this.electronApp.on('activate', () => this.onActivated())
@@ -84,11 +87,11 @@ class Yuntan {
         label: 'Help',
         submenu: [
           {
-            click: () => new License(this.mainWindow),
+            click: () => new License(this.mainWindow, app.getAppPath()),
             label: 'View License'
           },
           {
-            click: () => new About(this.mainWindow),
+            click: () => new About(this.mainWindow, app.getAppPath()),
             label: 'About yuntan'
           }
         ]
