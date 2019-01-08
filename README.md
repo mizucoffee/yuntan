@@ -12,6 +12,9 @@
 <a alt="MIT License" href="https://kawakawaritsuki.mit-license.org/">
   <img src="https://img.shields.io/badge/license-MIT-blue.svg">
 </a>
+<a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fmizucoffee%2FYuntan?ref=badge_shield" alt="FOSSA Status">
+  <img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmizucoffee%2FYuntan.svg?type=shield"/>
+</a>
 </p>
 
 ## 概要
@@ -21,13 +24,14 @@
 
 **Yuntan was inspired by Seaurchin.**
 
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmizucoffee%2FYuntan.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmizucoffee%2FYuntan?ref=badge_large)
+
 ### Feature
 - Cross Platfrom (Win/Mac/Linux)
 - Open Source
 - Support Sus Format
 
 ### Thanks
-
 - Electron
 - TypeScript
 - Babylon.js
