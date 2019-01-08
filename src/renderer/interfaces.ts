@@ -1,13 +1,15 @@
+import * as GUI from 'babylonjs-gui'
+
 export interface ISkin {
   config: IConfig
   path: string
   scripts: Map<string, IScript>
 }
 export interface IScript {
-  onStart: (scene: BABYLON.Scene) => void
-  onKeyDown: () => void
+  onStart: (scene: BABYLON.Scene, gui: GUI.AdvancedDynamicTexture) => void
+  onKeyDown: (keyCode: number) => void
   onFinished: () => void
-  onTick: (scene: BABYLON.Scene) => void
+  onTick: (scene: BABYLON.Scene) => string
 }
 export interface IConfig {
   skin: {

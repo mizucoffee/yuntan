@@ -1,4 +1,3 @@
-import * as BABYLON from 'babylonjs'
 import { ipcRenderer } from 'electron'
 import * as Stats from 'stats-js'
 
@@ -12,12 +11,12 @@ const canvas = document.getElementById('canvas') as HTMLCanvasElement
 const engine = new BABYLON.Engine(canvas, true)
 
 const skinManager = new SkinManager()
-const scene = new Skin(canvas, skinManager.getCurrentSkin())
+const skin = new Skin(canvas, engine, skinManager.getCurrentSkin())
 
 resize()
 engine.runRenderLoop(() => {
   stats.begin()
-  scene.render()
+  skin.render()
   stats.end()
 })
 
@@ -50,4 +49,8 @@ function toggleStats() {
   } else {
     s.remove()
   }
+}
+
+document.onkeydown = event => {
+  skin.keyDown(event)
 }

@@ -1,30 +1,70 @@
+import * as GUI from 'babylonjs-gui'
 import { IScript, ISkin } from './interfaces'
+
+interface ISceneWithConfig {
+  script: IScript
+  scene: BABYLON.Scene
+}
 
 class Skin {
   public canvas: HTMLCanvasElement
   private skin: ISkin
   private engine: BABYLON.Engine
-  private scene: BABYLON.Scene
+  private scenes = new Map<string, ISceneWithConfig>()
+  private gui: GUI.AdvancedDynamicTexture
+  private currentScene: ISceneWithConfig
 
-  constructor(canvas: HTMLCanvasElement, skin: ISkin) {
+  constructor(canvas: HTMLCanvasElement, engine: BABYLON.Engine, skin: ISkin) {
     this.canvas = canvas
-    this.engine = new BABYLON.Engine(canvas, true)
-    this.scene = new BABYLON.Scene(this.engine)
+    this.engine = engine
+    skin.scripts.forEach((value, key) => {
+      this.scenes.set(key, {
+        scene: new BABYLON.Scene(this.engine),
+        script: value
+      })
+    })
     this.skin = skin
-    this.getSceneScript().onStart(this.scene)
+    this.currentScene = this.scenes.get(
+      this.skin.config.skin.entry
+    ) as ISceneWithConfig
+    this.gui = GUI.AdvancedDynamicTexture.CreateFullscreenUI(
+      'UI',
+      true,
+      this.currentScene.scene
+    )
+    this.getSceneScript().onStart(this.currentScene.scene, this.gui)
   }
 
   public render() {
-    this.getSceneScript().onTick(this.scene)
-    this.scene.render()
+    const name = this.getSceneScript().onTick(this.currentScene.scene)
+    this.currentScene.scene.render()
+    if (this.skin.scripts.has(name)) {
+      this.changeScene(name)
+    }
+  }
+
+  public keyDown(event: KeyboardEvent) {
+    this.getSceneScript().onKeyDown(event.keyCode)
+  }
+
+  public changeScene(name: string) {
+    this.getSceneScript().onFinished()
+    this.gui.dispose()
+    this.gui = GUI.AdvancedDynamicTexture.CreateFullscreenUI(
+      'UI',
+      true,
+      this.currentScene.scene
+    )
+    this.currentScene = this.scenes.get(name) as ISceneWithConfig
+    this.getSceneScript().onStart(this.currentScene.scene, this.gui)
   }
 
   public getScene() {
-    return this.scene
+    return this.currentScene.scene
   }
 
   private getSceneScript() {
-    return this.skin.scripts.get(this.skin.config.skin.entry) as IScript
+    return this.currentScene.script
   }
 }
 

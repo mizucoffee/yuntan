@@ -42,7 +42,7 @@ class SkinManager {
 
   public getCurrentSkin(): ISkin {
     return this.skins.get(this.currentSkin) as ISkin
-  }
+  } // スキンクラス返すようにした方が良い・というかスキンクラス自体をマネージャで管理
 }
 
 export default SkinManager
