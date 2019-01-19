@@ -50,12 +50,12 @@ class Skin {
   public changeScene(name: string) {
     this.getSceneScript().onFinished()
     this.gui.dispose()
+    this.currentScene = this.scenes.get(name) as ISceneWithConfig
     this.gui = GUI.AdvancedDynamicTexture.CreateFullscreenUI(
       'UI',
       true,
       this.currentScene.scene
     )
-    this.currentScene = this.scenes.get(name) as ISceneWithConfig
     this.getSceneScript().onStart(this.currentScene.scene, this.gui)
   }
 
