@@ -1,4 +1,5 @@
 import * as GUI from 'babylonjs-gui'
+import { remote } from 'electron'
 import { IScript, ISkin } from './interfaces'
 
 interface ISceneWithConfig {
@@ -38,6 +39,9 @@ class Skin {
   public render() {
     const name = this.getSceneScript().onTick(this.currentScene.scene)
     this.currentScene.scene.render()
+    if (name === 'finish') {
+      remote.getCurrentWindow().close()
+    }
     if (this.skin.scripts.has(name)) {
       this.changeScene(name)
     }
